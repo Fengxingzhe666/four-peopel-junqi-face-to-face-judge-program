@@ -94,7 +94,7 @@ void MainWindow::on_Save_Button_clicked()
 ```
 程序内部实际的ui交互逻辑如下：  
 ![](https://github.com/Fengxingzhe666/four-peopel-junqi-face-to-face-judge-program/blob/main/img/%E4%BA%A4%E4%BA%92%E9%80%BB%E8%BE%91.jpg?raw=true)  
-交互的难点是，**怎样对每位玩家左右各25个按钮进行批量操作？**每个按钮的逻辑都是类似的但不同的，如果每个槽函数都单独编写，不但代码量非常大不易维护，还非常容易出错。解决这个问题采用了结构体指针的思想：  
+交互的难点是，**怎样对每位玩家左右各25个按钮进行批量操作**？每个按钮的逻辑都是类似的但不同的，如果每个槽函数都单独编写，不但代码量非常大不易维护，还非常容易出错。解决这个问题采用了结构体指针的思想：  
 注意MainWindow中的构造函数：
 ```c++
 MainWindow::MainWindow(QWidget *parent)
