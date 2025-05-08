@@ -11,9 +11,24 @@
 二：摆放布局时，炸弹不能摆在第一排，地雷只能摆在后两排，军旗只能摆在大本营，即最后一排的第2位或第4位。当玩家的军旗阵亡时，该玩家立刻出局，所有棋子被判定死亡。  
 三：当某位玩家的司令阵亡时，程序将自动亮出该玩家的军旗所在位置。  
 ## 实现原理  
+![](https://github.com/Fengxingzhe666/four-peopel-junqi-face-to-face-judge-program/blob/main/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-04-03%20095306.png?raw=true)  
 玩家可以根据自己的对局习惯自定义布局，本项目设计了一个与用户交互的ui逻辑，应对用户各种的点击顺序，最终在用户选择了所有25颗棋子的位置后获得表示子力值的数组用于后续的比较。  
 图1左侧半边是用户的棋子编号与真实子力值的对比，右侧可以选择的是待摆放的棋子，灰显的是已经摆放到左侧的棋子。玩家需要单击选择右侧一个待摆放的棋子再单击左侧选择摆放的位置，程序就会建立对应关系。单击左侧已摆放的位置将会使得该棋子重新放回右侧，变为待摆放状态。  
 除此之外，程序支持用文件导入布局：  
+![](https://github.com/Fengxingzhe666/four-peopel-junqi-face-to-face-judge-program/blob/main/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-04-03%20101908.png?raw=true)  
 程序内部实际的ui交互逻辑如下：  
+![](https://github.com/Fengxingzhe666/four-peopel-junqi-face-to-face-judge-program/blob/main/img/%E4%BA%A4%E4%BA%92%E9%80%BB%E8%BE%91.jpg?raw=true)  
 在与四位玩家全部交互完毕后，程序会进入下一个窗口，本窗口会传入一个二维数组，表示四位玩家对应的25颗棋子的子力值，之后用于裁判棋子碰撞结果的逻辑。  
-
+![](https://github.com/Fengxingzhe666/four-peopel-junqi-face-to-face-judge-program/blob/main/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-04-03%20102732.png?raw=true)  
+用户依次单击选择2个碰撞的棋子，程序会在文本框返回碰撞的结果，被判定死亡的棋子会灰显。如图2即红色1-1碰撞黄色1-5，判定结果为黄色大，因此红色1-1被判定死亡，灰显。  
+![](https://github.com/Fengxingzhe666/four-peopel-junqi-face-to-face-judge-program/blob/main/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-04-03%20104059.png?raw=true)  
+根据游戏规则，当某玩家的司令阵亡时，程序将发出提示并展示该玩家的军旗位置。当某玩家军旗阵亡时，该玩家所有棋子被判定死亡。  
+除了以上功能外，程序会用一个结构体数组依次保存每次碰撞的过程，在游戏结束后，可以点击“显示记录”回放四位玩家的布局以及所有碰撞的结果，既可以用于对局复盘，也可以验证所有碰撞结果的正确性。  
+![](https://github.com/Fengxingzhe666/four-peopel-junqi-face-to-face-judge-program/blob/main/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-04-03%20104723.png?raw=true)  
+此外该结构体还用于回溯，在裁判界面可以点击“撤销”，撤销至上一步碰撞的程序状态。  
+裁判界面的“工兵”和“后两排移动”两个checkbox控件可以在有工兵飞铁路或后两排主动碰别人棋时选择，用于判定该玩家是否违反游戏规则。  
+## 实际应用场景
+该项目已用于家庭娱乐场合，实际使用场景如下图：  
+一张为实际游戏的棋盘图，一张是玩家用于记录自己布局的编号与真实子力对比的图。  
+![](https://github.com/Fengxingzhe666/four-peopel-junqi-face-to-face-judge-program/blob/main/img/%E7%BB%88%E7%9B%98%E6%8B%8D%E7%85%A709.jpg?raw=true)  
+![](https://github.com/Fengxingzhe666/four-peopel-junqi-face-to-face-judge-program/blob/main/img/%E7%BA%B8%E7%89%87%E5%B8%83%E5%B1%80.jpg?raw=true)  
